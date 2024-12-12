@@ -22,12 +22,20 @@
             <div class="step active" id="step-1">
                 <h3>1. 개인정보 수집</h3>
                 <div class="mb-3">
+                    <label for="legalBasis" class="form-label">법적 근거</label>
+                    <textarea class="form-control" id="legalBasis" name="legalBasis" required></textarea>
+                </div>
+                <div class="mb-3">
                     <label for="collectionPurpose" class="form-label">수집 목적</label>
                     <textarea class="form-control" id="collectionPurpose" name="collectionPurpose" required></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="collectionData" class="form-label">수집 정보</label>
+                    <label for="collectionData" class="form-label">수집 항목</label>
                     <input type="text" class="form-control" id="collectionData" name="collectionData" required>
+                </div>
+                <div class="mb-3">
+                    <label for="retentionPeriod" class="form-label">보유 기간</label>
+                    <input type="text" class="form-control" id="retentionPeriod" name="retentionPeriod" required>
                 </div>
                 <button type="button" class="btn btn-primary" onclick="nextStep()">다음</button>
             </div>
