@@ -7,6 +7,8 @@ database = input("Enter database name: ")
 user = input("Enter database user: ")
 password = getpass("Enter database password: ")
 
+conn = None
+cursor = None
 try:
     conn = mysql.connector.connect(host=host, database=database, user=user, password=password)
     cursor = conn.cursor()
@@ -30,7 +32,9 @@ try:
 
 except mysql.connector.Error as err:
     print("Error: ", err)
+    raise SystemExit(1)
 finally:
-    if conn.is_connected():
+    if cursor is not None:
         cursor.close()
+    if conn is not None and conn.is_connected():
         conn.close()

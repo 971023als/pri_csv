@@ -9,6 +9,8 @@ user = input("Enter database user: ")
 password = getpass.getpass("Enter database password: ")  # 비밀번호는 화면에 표시되지 않도록 입력
 
 # 데이터베이스 연결 설정
+conn = None
+cursor = None
 try:
     conn = psycopg2.connect(
         host=host,
@@ -39,9 +41,10 @@ try:
 
 except psycopg2.Error as e:
     print(f"An error occurred: {e}")
+    raise SystemExit(1)
 finally:
     # 연결 종료
-    if conn:
+    if cursor is not None:
         cursor.close()
+    if conn is not None:
         conn.close()
-Q!
