@@ -9,6 +9,8 @@ user = input("Enter database user: ")
 password = getpass("Enter database password: ")  # 비밀번호는 화면에 표시되지 않도록 입력
 
 # 데이터베이스 연결 설정
+conn = None
+cursor = None
 try:
     conn = mysql.connector.connect(
         host=host,
@@ -45,7 +47,9 @@ try:
 
 except mysql.connector.Error as err:
     print("Error: ", err)
+    raise SystemExit(1)
 finally:
-    if conn.is_connected():
+    if cursor is not None:
         cursor.close()
+    if conn is not None and conn.is_connected():
         conn.close()
