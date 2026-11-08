@@ -2,6 +2,7 @@
 require 'vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Cell\DataType;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 입력 데이터 가져오기
@@ -40,13 +41,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sheet->setCellValue('A1', '단계');
     $sheet->setCellValue('B1', '내용');
     $sheet->setCellValue('A2', '수집');
-    $sheet->setCellValue('B2', "법적근거: {$legalBasis}\n수집목적: {$collectionPurpose}\n수집항목: {$collectionData}\n보유기간: {$retentionPeriod}");
+    $sheet->setCellValueExplicit('B2', "법적근거: {$legalBasis}\n수집목적: {$collectionPurpose}\n수집항목: {$collectionData}\n보유기간: {$retentionPeriod}", DataType::TYPE_STRING);
     $sheet->setCellValue('A3', '이용');
-    $sheet->setCellValue('B3', $usagePurpose);
+    $sheet->setCellValueExplicit('B3', $usagePurpose, DataType::TYPE_STRING);
     $sheet->setCellValue('A4', '제공');
-    $sheet->setCellValue('B4', "{$thirdParty}: {$provisionPurpose}");
+    $sheet->setCellValueExplicit('B4', "{$thirdParty}: {$provisionPurpose}", DataType::TYPE_STRING);
     $sheet->setCellValue('A5', '파기');
-    $sheet->setCellValue('B5', $destructionMethod);
+    $sheet->setCellValueExplicit('B5', $destructionMethod, DataType::TYPE_STRING);
     $excelFile = 'privacy_flowchart.xlsx';
     $writer = new Xlsx($spreadsheet);
     $writer->save($excelFile);
